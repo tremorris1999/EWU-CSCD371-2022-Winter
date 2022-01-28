@@ -16,7 +16,7 @@ namespace Logger
         {
             DateTimeOffset dt = DateTimeOffset.Now;
             StreamWriter file = new StreamWriter(this.path, append: true);
-            file.WriteLine(dt.ToString("g") + " " + this.className + " " + logLevel + ": " + message);
+            file.WriteLine(dt.ToString("g") + " " + this.ClassName + " " + logLevel + ": " + message);
             file.Close();
         }
     }

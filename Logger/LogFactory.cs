@@ -8,7 +8,7 @@
             if (className == null)
                 return null!;
 
-            else if (className.CompareTo("FileLogger") == 0)
+            else if (className.CompareTo(nameof(FileLogger)) == 0)
             {
                 if (path == null)
                     return null!;
