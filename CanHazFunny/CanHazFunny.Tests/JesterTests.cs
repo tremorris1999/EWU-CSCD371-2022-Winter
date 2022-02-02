@@ -29,7 +29,7 @@ namespace CanHazFunny.Tests
         [TestMethod]
         public void WriteJoke_Success()
         {
-            StringWriter stringWriter =  new StringWriter();
+            StringWriter stringWriter =  new();
             Console.SetOut(stringWriter);
 
             string joke = "Joke without he who will not be named (Nhuck Chorris)";

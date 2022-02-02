@@ -4,8 +4,8 @@ namespace CanHazFunny
 {
     public class Jester
     {
-        private IJokable _JokeService;
-        private IWritable _Output;
+        private readonly IJokable _jokeService;
+        private readonly IWritable _output;
 
         public Jester(IJokable? jokeService, IWritable? output)
         {
@@ -14,20 +14,20 @@ namespace CanHazFunny
             if(output == null)
                 throw new ArgumentNullException(nameof(output));
 
-            _JokeService = jokeService;
-            _Output = output;
+            _jokeService = jokeService;
+            _output = output;
         }
 
         public void TellJoke()
         {
-            string joke = _JokeService.GetJoke();
+            string joke = _jokeService.GetJoke();
 
             while (joke.ToLower().Contains("Chuck Norris".ToLower()))
             {
-                joke = _JokeService.GetJoke();
+                joke = _jokeService.GetJoke();
             }
 
-            _Output.Write(joke);
+            _output.Write(joke);
         }
     }
 }

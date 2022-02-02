@@ -11,15 +11,15 @@ namespace CanHazFunny.Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void JokeWriter_NullTextWriterProperty_ThrowsException()
         {
-            JokeWriter jokeWriter = new JokeWriter();
+            JokeWriter jokeWriter = new();
             jokeWriter.Write("this should throw, since the TextWriter property is still null.");
         }
 
         [TestMethod]
         public void JokeWriter_Write_Success()
         {
-            StringWriter stringWriter = new StringWriter();
-            JokeWriter jokeWriter = new JokeWriter();
+            StringWriter stringWriter = new();
+            JokeWriter jokeWriter = new();
             jokeWriter.setTextWriter(stringWriter);
 
             string output = "test";

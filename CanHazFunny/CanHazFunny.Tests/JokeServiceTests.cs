@@ -8,7 +8,7 @@ namespace CanHazFunny.Tests
         [TestMethod]
         public void JokeService_GetJoke_ReturnsString()
         {
-            JokeService jokeService = new JokeService();
+            JokeService jokeService = new();
             string? joke = jokeService.GetJoke();
             Assert.IsInstanceOfType(joke, typeof(string));
         }

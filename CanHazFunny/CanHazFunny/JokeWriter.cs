@@ -20,9 +20,9 @@ namespace CanHazFunny
             TextWriter.WriteLine(output);
         }
 
-        public void setTextWriter(TextWriter textWriter)
+        public void SetTextWriter(TextWriter textWriter)
         {
-            this.TextWriter = textWriter;
+            TextWriter = textWriter;
         }
     }
 }
