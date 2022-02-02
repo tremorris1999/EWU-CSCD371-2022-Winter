@@ -37,7 +37,7 @@ namespace CanHazFunny.Tests
             mockIJokable.SetupSequence(mock => mock.GetJoke()).Returns("Chuck Norris").Returns("cHuCk NoRrIs").Returns(joke);
 
             JokeWriter jokeWriter = new JokeWriter();
-            jokeWriter.setTextWriter(Console.Out);
+            jokeWriter.SetTextWriter(Console.Out);
 
             Jester jester = new(mockIJokable.Object, jokeWriter);
 

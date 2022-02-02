@@ -20,7 +20,7 @@ namespace CanHazFunny.Tests
         {
             StringWriter stringWriter = new();
             JokeWriter jokeWriter = new();
-            jokeWriter.setTextWriter(stringWriter);
+            jokeWriter.SetTextWriter(stringWriter);
 
             string output = "test";
 
