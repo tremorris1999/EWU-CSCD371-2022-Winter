@@ -36,13 +36,6 @@ namespace GenericsHomework.Tests
                 Console.WriteLine(s);
             }
 
-            _Node = _Node.Next;
-
-            foreach (string s in _Node!)
-            {
-                Console.WriteLine(s);
-            }
-
             Assert.AreEqual($"0{Environment.NewLine}1{Environment.NewLine}2{Environment.NewLine}", stringWriter.ToString());
         }
 
