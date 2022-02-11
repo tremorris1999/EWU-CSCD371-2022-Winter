@@ -6,7 +6,23 @@ namespace Assignment
     public class SampleData : ISampleData
     {
         // 1.
-        public IEnumerable<string> CsvRows => throw new NotImplementedException();
+        public IEnumerable<string> CsvRows
+        {
+            get
+            {
+                FileStream fileStream = File.OpenRead("People.csv");
+                StreamReader reader = new StreamReader(fileStream);
+                List<string> list = new();
+                while(!reader.EndOfStream)
+                {
+                    string? line;
+                    if((line = reader.ReadLine()) != null)
+                        list.Add(line);
+                }
+
+                return list;
+            }
+        }
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
