@@ -49,9 +49,20 @@ namespace GenericsHomework
             Count += 1;
         }
 
+        /**
+         * Setting the next reference to the node itself is enough to clear the list. This is because the other nodes in the list are no longer referenced by anything
+         * currently in the code, and thus cannot be accessed by anyone writing outside (or inside for that matter) the library. The only place for these inaccessable nodes
+         * (or references to the nodes) lies with the garbage collector. Thus, assuming the garbage collector does it's job, this is very much sufficient.
+         * 
+         * I've also taken the time to take snapshots of memory usage in Visual Studio before and after calling Clear, and you can clearly see the extra nodes beyond the calling node
+         * are infact picked up by the garbage collector in the latter snapshot.
+         * 
+         * The list itself will not fall to garbage collection because every node is avaliable via reference (or via chain of references) to the programmer, and thus will
+         * not fall to garbage collection, UNLESS we were to lose all references to any nodes in the list.
+         */
         public void Clear()
         {
-            Next = this; // Note: still need to decide if this is really enough.
+            Next = this;
         }
 
         /**
