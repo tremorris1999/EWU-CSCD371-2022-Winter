@@ -58,7 +58,7 @@ namespace GenericsHomework
          * are infact picked up by the garbage collector in the latter snapshot.
          * 
          * The list itself will not fall to garbage collection because every node is avaliable via reference (or via chain of references) to the programmer, and thus will
-         * not fall to garbage collection, UNLESS we were to lose all references to any nodes in the list.
+         * not fall to garbage collection, UNLESS we were to lose ALL references to any nodes in the list.
          */
         public void Clear()
         {
