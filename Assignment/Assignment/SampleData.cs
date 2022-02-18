@@ -25,26 +25,12 @@ namespace Assignment
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
         {
-            //call csvrows property for data source
-            IEnumerable<string> csv = CsvRows;
 
-            List<string> list = new();
-            
-            //query the states from the data source
-            foreach(string row in csv)
-            {
-                string[] props = row.Split(',');
-                
-                //eliminate duplicate results to ensure the list is unique
-                if(list.Contains<String>(props[6]))
-                {
-                    list.Add(props[6]);
-                }
-            }
-
-
-            //sort the list alphabetically
-            return list.OrderBy(s => s);
+            /**
+             * Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
+             * 0  1         2        3     4             5    6     7
+             */
+            return CsvRows.Select(item => item.Split(',')[6]).Distinct().OrderBy(item => item);
         }
 
         // 3.
