@@ -6,10 +6,8 @@ namespace Assignment
     public class SampleData : ISampleData
     {
         // 1.
-        public IEnumerable<string> CsvRows
+        private Lazy<IEnumerable<string>>_CSV = new(() =>
         {
-            get
-            {
                 FileStream fileStream = File.OpenRead("People.csv");
                 StreamReader reader = new StreamReader(fileStream);
                 List<string> list = new();
@@ -19,10 +17,10 @@ namespace Assignment
                     if((line = reader.ReadLine()) != null)
                         list.Add(line);
                 }
-
-                return list;
-            }
-        }
+                return list.Skip(1);
+        });
+        
+        public IEnumerable<string> CsvRows { get {return _CSV.Value;} }
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows() 
