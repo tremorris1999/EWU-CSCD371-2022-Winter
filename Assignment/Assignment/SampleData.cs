@@ -6,7 +6,7 @@ namespace Assignment
     public class SampleData : ISampleData
     {
         // 1.
-        private readonly Lazy<IEnumerable<string>>_CSV = new(() =>
+        private readonly Lazy<IEnumerable<string>> _CSV = new(() =>
         {
                 FileStream fileStream = File.OpenRead("People.csv");
                 StreamReader reader = new(fileStream);
