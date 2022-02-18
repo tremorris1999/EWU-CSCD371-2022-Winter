@@ -44,7 +44,7 @@ namespace Assignment
                 {
                     string[] dump = item.Split(',');
                     return new Person(dump[1], dump[2], new Address(dump[4], dump[5], dump[6], dump[7]), dump[4]);
-                });
+                }).OrderBy(item => item.Address);
             } }
 
         // 5.
