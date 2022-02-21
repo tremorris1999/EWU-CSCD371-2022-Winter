@@ -35,14 +35,24 @@ namespace Assignment
 
         // 3.
         public string GetAggregateSortedListOfStatesUsingCsvRows()
-            => throw new NotImplementedException();
+        {
+            string[] statesList = GetUniqueSortedListOfStatesGivenCsvRows().ToArray();
+            string aggList = String.Join(", ", statesList);
+            return aggList;
+        }
 
         // 4.
         public IEnumerable<IPerson> People => throw new NotImplementedException();
 
         // 5.
-        public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(
-            Predicate<string> filter) => throw new NotImplementedException();
+        public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
+        {
+            IEnumerable<(string, string)> query = from person in People
+                                                  where person.EmailAddress.Equals(filter)
+                                                  select (person.FirstName, person.LastName);
+
+            return query;
+        }
 
         // 6.
         public string GetAggregateListOfStatesGivenPeopleCollection(
