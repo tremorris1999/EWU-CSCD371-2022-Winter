@@ -54,5 +54,23 @@ namespace Assignment.Tests
              * TODO: ask for clarification and finish
              */
         }
+
+        [TestMethod]
+        public void Part3_works()
+        {
+            //TODO: review this test might not be thorough enough
+
+            SampleData s1 = new();
+            SampleData s2 = new();
+
+            Assert.AreEqual<string>(s1.GetAggregateSortedListOfStatesUsingCsvRows(),
+                s2.GetAggregateSortedListOfStatesUsingCsvRows());
+        }
+
+        [TestMethod]
+        public void Part5_works()
+        {
+
+        }
     }
 }
