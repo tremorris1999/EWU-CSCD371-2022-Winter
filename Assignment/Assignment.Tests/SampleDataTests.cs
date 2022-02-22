@@ -56,10 +56,8 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void Part3_works()
+        public void GetAggregateSortedListOfStatesUsingCsvRows_ReturnsCorrectly()
         {
-            //TODO: review this test might not be thorough enough
-
             SampleData s1 = new();
             SampleData s2 = new();
 
@@ -68,9 +66,12 @@ namespace Assignment.Tests
         }
 
         [TestMethod]
-        public void Part5_works()
+        public void FilterByEmailAddress_ReturnsCorrectly()
         {
-
+            SampleData s1 = new();
+            Predicate<string> pre = (word => word == "cstennine2@wired.com");
+            IEnumerable<(string, string)> q = s1.FilterByEmailAddress(pre);
+            Assert.IsTrue(q.Contains(("Chadd", "Stennine")));
         }
     }
 }
