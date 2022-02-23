@@ -42,14 +42,14 @@ namespace Assignment
         }
 
         // 4.
-        public IEnumerable<IPerson> People { get
-            {
-                return CsvRows.Select(item =>
-                {
-                    string[] dump = item.Split(',');
-                    return new Person(dump[1], dump[2], new Address(dump[4], dump[5], dump[6], dump[7]), dump[4]);
-                }).OrderBy(item => item.Address);
-            } }
+        public IEnumerable<IPerson> People
+        {
+            /**
+             * Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
+             * 0  1         2        3     4             5    6     7
+             */
+            get { return CsvRows.Select(item => item.Split(',')).OrderBy(item => item[6]).ThenBy(item => item[5]).ThenBy(item => item[7]).Select(item => new Person(item[1], item[2], new Address(item[4], item[5], item[6], item[7]), item[3])); }
+        }
 
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
@@ -62,7 +62,10 @@ namespace Assignment
         }
 
         // 6.
-        public string GetAggregateListOfStatesGivenPeopleCollection(
-            IEnumerable<IPerson> people) => throw new NotImplementedException();
+        public string GetAggregateListOfStatesGivenPeopleCollection(IEnumerable<IPerson> people)
+        {
+            var p = people.Select(item => item.Address.State).Distinct();
+            return "";
+        }
     }
 }
