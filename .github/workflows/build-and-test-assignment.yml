@@ -1,0 +1,28 @@
+name: Build and Test Assignments
+
+on:
+  push:
+    branches: [ Assignment** ]
+  pull_request:
+    branches: [ Assignment** ]
+
+defaults:
+      run:
+        working-directory: ./Assignment/
+        
+jobs:
+  build:
+    name: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --no-restore --verbosity normal
