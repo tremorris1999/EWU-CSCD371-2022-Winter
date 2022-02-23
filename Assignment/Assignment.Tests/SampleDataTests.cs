@@ -67,8 +67,15 @@ namespace Assignment.Tests
         [TestMethod]
         public void People_SetCorrectly()
         {
+            /**
+            * Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
+            * 0  1         2        3     4             5    6     7
+            */
             SampleData s1 = new();
-            
+            var expected = s1.CsvRows.Select(item => item.Split(',')).Select(item => item[1] + "," + item[2] + "," + item[3] + "," + item[4] + "," + item[5] + "," + item[6] + "," + item[7]).OrderBy(item => item);
+            var actual = s1.People.Select(item => item.FirstName + "," + item.LastName + "," + item.EmailAddress + "," + item.Address.StreetAddress + "," + item.Address.City + "," + item.Address.State + "," + item.Address.Zip).OrderBy(item => item);
+
+            Assert.IsTrue(actual.SequenceEqual(expected));
         }
 
         [TestMethod]
