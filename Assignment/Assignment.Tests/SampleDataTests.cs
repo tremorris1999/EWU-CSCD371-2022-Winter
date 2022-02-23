@@ -53,10 +53,13 @@ namespace Assignment.Tests
             list.Add("id,first,last,email,address,Spokane,WA");
             list.Add("id,first,last,email,address,Spokane,WA");
             list.Add("id,first,last,email,address,Spokane,WA");
-            var mockIEnumerble = new Mock<SampleData>();
-            /**
-             * TODO: ask for clarification and finish
-             */
+            string[] expected = { "WA" };
+
+            SampleData.TestList = list;
+            SampleData s1 = new();
+            IEnumerable<string> actual = s1.GetUniqueSortedListOfStatesGivenCsvRows();
+
+            Assert.IsTrue(actual.SequenceEqual(expected));
         }
 
 
@@ -81,6 +84,7 @@ namespace Assignment.Tests
             * Id,FirstName,LastName,Email,StreetAddress,City,State,Zip
             * 0  1         2        3     4             5    6     7
             */
+            SampleData.TestList = null; // ensure Lazy Initializes correctly
             SampleData s1 = new();
             var expected = s1.CsvRows.Select(item => item.Split(',')).Select(item => item[1] + "," + item[2] + "," + item[3] + "," + item[4] + "," + item[5] + "," + item[6] + "," + item[7]).OrderBy(item => item);
             var actual = s1.People.Select(item => item.FirstName + "," + item.LastName + "," + item.EmailAddress + "," + item.Address.StreetAddress + "," + item.Address.City + "," + item.Address.State + "," + item.Address.Zip).OrderBy(item => item);
@@ -95,9 +99,9 @@ namespace Assignment.Tests
         public void FilterByEmailAddress_ReturnsCorrectly()
         {
             SampleData s1 = new();
-            Predicate<string> pre = (word => word.Contains(""));
-            IEnumerable<(string, string)> q = s1.FilterByEmailAddress(pre);
-            Assert.IsTrue(q.Count() > 0);
+            Predicate<string> predicate = item => item.Contains("q");
+            IEnumerable<(string, string)> query = s1.FilterByEmailAddress(predicate);
+            Assert.IsTrue(query.Count() > 0);
         }
 
 

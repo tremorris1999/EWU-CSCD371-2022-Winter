@@ -6,21 +6,29 @@ namespace Assignment
     public class SampleData : ISampleData
     {
         // 1.
+        // This is included for testing hardcoded lists. Nothing else.
+        public static IEnumerable<string>? TestList { get; set; }
+
         private readonly Lazy<IEnumerable<string>> _CSV = new(() =>
         {
+            if (TestList == null)
+            {
                 FileStream fileStream = File.OpenRead("People.csv");
                 StreamReader reader = new(fileStream);
                 List<string> list = new();
-                while(!reader.EndOfStream)
+                while (!reader.EndOfStream)
                 {
                     string? line;
-                    if((line = reader.ReadLine()) != null)
+                    if ((line = reader.ReadLine()) != null)
                         list.Add(line);
                 }
                 return list.Skip(1);
+            }
+
+            return TestList;
         });
         
-        public IEnumerable<string> CsvRows { get {return _CSV.Value;} }
+        public IEnumerable<string> CsvRows { get { return _CSV.Value; } }
 
         // 2.
         public IEnumerable<string> GetUniqueSortedListOfStatesGivenCsvRows()
@@ -54,11 +62,7 @@ namespace Assignment
         // 5.
         public IEnumerable<(string FirstName, string LastName)> FilterByEmailAddress(Predicate<string> filter)
         {
-            IEnumerable<(string, string)> query = from person in People
-                                                  where person.EmailAddress.Equals(filter)
-                                                  select (person.FirstName, person.LastName);
-
-            return query;
+            return People.Where(item => filter(item.EmailAddress)).Select(item => (item.FirstName, item.LastName));
         }
 
         // 6.
