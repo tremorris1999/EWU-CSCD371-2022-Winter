@@ -86,5 +86,14 @@ namespace Assignment.Tests
             IEnumerable<(string, string)> q = s1.FilterByEmailAddress(pre);
             Assert.IsTrue(q.Contains(("Chadd", "Stennine")));
         }
+
+        [TestMethod]
+        public void GetAggregateListOfStatesGivenPeopleCollection_ReturnsCorrectly()
+        {
+            SampleData s1 = new();
+            var expected = s1.GetUniqueSortedListOfStatesGivenCsvRows().Aggregate((aggregate, next) => aggregate + "," + next).OrderBy(item => item);
+            var actual = s1.GetAggregateListOfStatesGivenPeopleCollection(s1.People).OrderBy(item => item);
+            Assert.IsTrue(actual.SequenceEqual(expected));
+        }
     }
 }
