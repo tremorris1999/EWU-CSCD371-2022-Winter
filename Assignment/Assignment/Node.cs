@@ -149,6 +149,31 @@ namespace GenericsHomework
             }
         }
 
+        /*
+         * Small design choice here. I've opted to include the node itself in ChildItems because the intended usage is unclear to me.
+         * I could see an argument for either case: with the node, and without the node.
+         * 
+         * Consider the scenario:
+         * You're doing some kind of work involving each node in the list.
+         * Perhaps you're mid way through the set and now need to use ChildItems
+         * to work on the remaining relevant nodes. Should you work on the current
+         * node and beyond (up to your maximum definition), or should you
+         * only worry about the nodes following the current node?
+         * 
+         * I find that including the current node can be very convenient and
+         * perhaps more useful considering you can still access the case without 
+         * the current node by calling *Next.ChildItems*. I think this is a
+         * far better (and more versatile) design than to disinclude the calling
+         * node in the ChildItems result.
+         */
+        public IEnumerable<T> ChildItems(int maximum)
+        {
+            if (maximum < 0)
+                throw new ArgumentOutOfRangeException(nameof(maximum));
+            int i = 0;
+            return this.Where(item => (i++ < maximum));
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             return new NodeEnumerator<T>(this);
