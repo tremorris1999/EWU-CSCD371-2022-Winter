@@ -68,7 +68,7 @@ namespace Assignment.Tests
             SampleData s1 = new();
             SampleData s2 = new();
 
-            Assert.AreEqual<string>(s1.GetAggregateSortedListOfStatesUsingCsvRows(), s2.GetAggregateSortedListOfStatesUsingCsvRows());
+            Assert.AreEqual(s1.GetAggregateSortedListOfStatesUsingCsvRows(), s2.GetAggregateSortedListOfStatesUsingCsvRows());
         }
 
 
