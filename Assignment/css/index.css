@@ -1,8 +1,11 @@
-body{
+body
+{
     width: 70%;
+    margin: auto
 }
 
-.titlebar{
+.titlebar
+{
     background-color: black;
     height: 30px;
     padding-left: 10px;
@@ -11,15 +14,60 @@ body{
 }
 
 .titlebar_text{
-    display: inline-block;
     color: red;
     font-size: x-large;
-    text-align: left;
+    float: left;
+    padding-top: 0.5%;
 }
 
 .titlebar_menu{
-    display: inline-block;
     color: white;
-    text-align: right;
+    float: right;
+    padding-top: 5px;
+}
+
+.jokecard
+{
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.jokecard_title
+{
+    background-color: lightgray;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.jokecard_content
+{
+    padding-left: 10px;
+    border-bottom: 2px solid grey;
+    padding-bottom: 20px;
+}
+
+.jokecard_another
+{
+    float: left;
+    color: white;
+    background-color: rgba(0, 160, 209, 0.849);
+    border-top: 2px solid gray;
+    border-left: 2px solid rgba(128, 128, 128, 0.671);
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.jokecard_api
+{
+    float: left;
+    background-color: lightgray;
+    margin-left: 5px;
+    padding: 10px;
+    border: 2px solid grey;
+    border-radius: 5px;
 }
 
