@@ -1,0 +1,25 @@
+body{
+    width: 70%;
+}
+
+.titlebar{
+    background-color: black;
+    height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+}
+
+.titlebar_text{
+    display: inline-block;
+    color: red;
+    font-size: x-large;
+    text-align: left;
+}
+
+.titlebar_menu{
+    display: inline-block;
+    color: white;
+    text-align: right;
+}
+
