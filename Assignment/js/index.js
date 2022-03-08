@@ -39,3 +39,6 @@ document.getElementsByClassName("jokecard_another").addEventListener("click", fu
             jokeError.innerText = "Please try again in a few moments.";
         })
 });
+
+//TODO: modify axios for a two-part joke as specified in the readme
+//TODO: add setTimeout(function (), 4000) between setup and punchline
