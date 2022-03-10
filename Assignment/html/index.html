@@ -1,34 +1,44 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Test Page</title>
-        <link rel="icon" type="image/x-icon" href="../res/favicon.ico">
-        <link rel="stylesheet" href="../css/index.css">
-        <script src="https://kit.fontawesome.com/f1752600a2.js" crossorigin="anonymous"></script>
-    </head>
+<html lang="en">
 
-    <body>
-        <div class="titlebar">
-            <span class="titlebar_text">EWU</span>
-            
-            <div class ="titlebar_menu">
-                <button class="titlebar_menu_button">Menu <i class="fa-solid fa-bars"></i></button>
-                <div class="menu_content">
-                    <button href="#">AAAAAA</button>
-                    <button href="#">AAAAAAAAA</button>
-                    <button href="#">AAAAAA</button>
-                    <button href="#">AAAA</button>
-                </div>
+<head>
+    <title>Test Page</title>
+    <link rel="icon" type="image/x-icon" href="../res/favicon.ico">
+    <link rel="stylesheet" href="../css/site.css">
+    <script src="https://kit.fontawesome.com/f1752600a2.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body onload="getJoke()" id="body">
+    <div class="titlebar">
+        <span class="titlebar_text">EWU</span>
+
+        <div class="titlebar_menu">
+            <button id="menu_btn" class="titlebar_menu_button" onclick="showMenu()">Menu <i id="hamburger" class="fa-solid fa-bars"></i></button>
+            <div class="menu_content" id="menu">
+                <button onclick="destroyEverything()">Watch the world burn!</button>
+                <button onclick="reverseAll()">?ESREVER</button>
+                <button onclick="redirectToLog()">Show debug log</button>
+                <button onclick="alertUser()">Awaken.</button>
             </div>
         </div>
-        <h1>The Joke Page</h1>
-        <hr>
-        <div class="jokecard">
+    </div>
+    <h1>The Joke Page</h1>
+    <hr>
+    <div class="jokecard">
+        <div class="header">
             <h2 class="jokecard_title">A Joke</h2>
-            <p class="jokecard_setup">Setup.<p>
-            <p class="jokecard_punchline">Punchline!<p></p>
-            <button class="jokecard_another" href="#">Another Joke</button>
-            <button class="jokecard_api" href="#">Joke API</button>
         </div>
-    </body>
+        <div class="body">
+            <p class="jokecard_setup" id="setup"></p>
+            <p class="jokecard_punchline" id="punchline"></p>
+        </div>
+        <div class="footer">
+            <button class="jokecard_another" id="another_joke" onclick="getJoke()">Another Joke</button>
+            <a class="jokecard_api" href="https://v2.jokeapi.dev/" target="_blank">Joke API</a>
+        </div>
+    </div>
+    <script src="../js/index.js"></script>
+</body>
+
 </html>
