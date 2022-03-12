@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assignment.Tests;
@@ -65,7 +66,8 @@ public class PingProcessTests
     public void RunAsync_UsingTaskReturn_Success()
     {
         // Do NOT use async/await in this test.
-        PingResult result = default;
+        CancellationTokenSource cancellationTokenSource = new();
+        PingResult result = Sut.RunAsync("localhost", cancellationTokenSource.Token).Result;
         // Test Sut.RunAsync("localhost");
         AssertValidPingOutput(result);
     }
@@ -75,8 +77,9 @@ public class PingProcessTests
     async public Task RunAsync_UsingTpl_Success()
     {
         // DO use async/await in this test.
-        PingResult result = default;
-
+        CancellationTokenSource cancellationTokenSource = new();
+        PingResult result = await Sut.RunAsync("localhost", cancellationTokenSource.Token);
+        cancellationTokenSource.Cancel();
         // Test Sut.RunAsync("localhost");
         AssertValidPingOutput(result);
     }
