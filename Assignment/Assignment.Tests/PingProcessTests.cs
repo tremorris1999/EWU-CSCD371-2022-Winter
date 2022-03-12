@@ -127,7 +127,8 @@ public class PingProcessTests
 #pragma warning disable CS1998 // Remove this
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
-        PingResult result = default;
+        CancellationTokenSource cancellationTokenSource = new();
+        PingResult result = await Sut.RunLongRunningAsync("localhost", cancellationTokenSource.Token);
         // Test Sut.RunLongRunningAsync("localhost");
         AssertValidPingOutput(result);
     }
@@ -153,7 +154,7 @@ Reply from ::1: time<*
 Ping statistics for ::1:
     Packets: Sent = *, Received = *, Lost = 0 (0% loss),
 Approximate round trip times in milli-seconds:
-    Minimum = *, Maximum = *, Average = *\n".Trim();
+    Minimum = *, Maximum = *, Average = *".Trim();
     private void AssertValidPingOutput(int exitCode, string? stdOutput)
     {
         Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
