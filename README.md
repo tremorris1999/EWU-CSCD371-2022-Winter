@@ -1,29 +1,3 @@
-# EWU-CSCD371-2021-Winter
-
-## See [Docs](Docs)
-
-## Assignment 9&10
-
-The purpose of this assignment is to solidify your learning of multithreaded programing
-with the Task Parallel Library (TPL).
-
-### Due Dates
-
-- Assignment 9&10 is due (even though you are pairing) **Monday March 21, 11:59 PM.**
-- Code reviews (be everyone individually) are due **Wednesday March 23, 11:59 PM**. (Thus all PRs will be reviewed twice.)
-- Final PR is due **Thursday March 24, 11:59 PM**.
-- **The combination of Assignment 9&10 will be graded - starting Friday March 24.**
-
-## Reading
-
-- Chapter 19: Introducing Multithreading
-- Chapter 21: Iterating in Parallel
-
-Previously Assigned
-
-- Chapter 20: Programming with Task-Based Asynchronous Pattern
-- Chapter 22: Thread Synchronization
-
 ## Instructions
 
 1. Implement `PingProcess`' `public Task<PingResult> RunTaskAsync(string hostNameOrAddress)` ❌✔
