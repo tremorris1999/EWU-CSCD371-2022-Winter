@@ -95,7 +95,6 @@ public class PingProcessTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(TaskCanceledException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrappingTaskCanceledException()
     {
         try
@@ -107,8 +106,7 @@ public class PingProcessTests
         }
         catch (AggregateException ex)
         {
-            foreach (Exception e in ex.Flatten().InnerExceptions)
-                throw e;
+            Assert.IsTrue(ex.Flatten().InnerException is TaskCanceledException);
         }
     }
 
