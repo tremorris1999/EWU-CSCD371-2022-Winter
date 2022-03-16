@@ -120,15 +120,29 @@ public class PingProcessTests
         int? lineCount = result.StdOutput?.Trim().Split(Environment.NewLine).Length;
         Assert.AreEqual(expectedLineCount, lineCount);
     }
-
     [TestMethod]
-#pragma warning disable CS1998 // Remove this
-    async public Task RunLongRunningAsync_UsingTpl_Success()
+    public void RunLongRunningAsync_UsingTpl_Success()
     {
         CancellationTokenSource cancellationTokenSource = new();
-        PingResult result = await Sut.RunLongRunningAsync("localhost", cancellationTokenSource.Token);
-        // Test Sut.RunLongRunningAsync("localhost");
-        AssertValidPingOutput(result);
+        ProcessStartInfo[] infoArray = {
+        new("ping", "localhost"),
+        new("ping", "google.com"),
+        new("ping", "amazon.com")
+        };
+
+        int timesProcessRan = 0;
+        int result = 0;
+        Parallel.ForEach(infoArray, async (pingProcess) =>
+        {
+
+            timesProcessRan++;
+            result += await Sut.RunLongRunningAsync(pingProcess, default, default, cancellationTokenSource.Token); 
+            //Exit code indicating success of Ping is 0, result should stay 0
+        });
+
+        Assert.AreEqual<int>(3, timesProcessRan);
+        Assert.AreEqual<int>(0, result);
+        
     }
 #pragma warning restore CS1998 // Remove this
 
