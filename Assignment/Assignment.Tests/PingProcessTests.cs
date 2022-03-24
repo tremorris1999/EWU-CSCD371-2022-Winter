@@ -1,8 +1,11 @@
 ﻿using IntelliTect.TestTools;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -63,6 +66,15 @@ public class PingProcessTests
     }
 
     [TestMethod]
+    public void RunAsync_WithProgress_Success()
+    {
+        int exitCode = -1;
+        Progress<string> progress = new((line) => Console.WriteLine(line));
+        exitCode = Sut.RunAsync(progress, "localhost");
+        Assert.IsTrue(exitCode == 0);
+    }
+
+    [TestMethod]
     public void RunAsync_UsingTaskReturn_Success()
     {
         // Do NOT use async/await in this test.
@@ -80,6 +92,7 @@ public class PingProcessTests
         PingResult result = await Sut.RunAsync("localhost", cancellationTokenSource.Token);
         cancellationTokenSource.Cancel();
         // Test Sut.RunAsync("localhost");
+        Console.WriteLine(result.StdOutput);
         AssertValidPingOutput(result);
     }
 
@@ -124,7 +137,6 @@ public class PingProcessTests
     }
 
     [TestMethod]
-#pragma warning disable CS1998 // Remove this
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
         CancellationTokenSource cancellationTokenSource = new();
@@ -132,7 +144,6 @@ public class PingProcessTests
         // Test Sut.RunLongRunningAsync("localhost");
         AssertValidPingOutput(result);
     }
-#pragma warning restore CS1998 // Remove this
 
     [TestMethod]
     public void StringBuilderAppendLine_InParallel_IsNotThreadSafe()

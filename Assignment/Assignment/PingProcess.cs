@@ -39,19 +39,28 @@ public class PingProcess
         return task.Result;
     }
 
+    public int RunAsync(IProgress<string> progress, string hostNameOrAddress)
+    {
+        StartInfo.Arguments = hostNameOrAddress;
+        Process process = RunProcessInternal(StartInfo, (string? line) =>
+        {
+            if (line != null)
+                progress.Report(line);
+        }, default, default);
+        return process.ExitCode;
+    }
+
     async public Task<PingResult> RunAsync(IEnumerable<string> hostNameOrAddresses, CancellationToken cancellationToken = default)
     {
         StringBuilder stringBuilder = new();
         ParallelQuery<Task<PingResult>>? all = hostNameOrAddresses.AsParallel().Select(async item =>
         {
             Task<PingResult> task = Task.Run(() => Run(item), cancellationToken);
-            // ...
-
-            await task.WaitAsync(cancellationToken);
+            await task;
             return task.Result;
         });
 
-        await Task.WhenAll(all);
+        //await Task.WhenAll(all);
         int total = all.Aggregate(0, (total, item) => total + item.Result.ExitCode);
         stringBuilder.Append(all.Aggregate("", (soFar, item) => soFar.Trim() + item.Result.StdOutput));
         Console.WriteLine(stringBuilder.ToString().Trim());
