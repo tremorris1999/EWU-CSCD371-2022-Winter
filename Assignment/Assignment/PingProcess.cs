@@ -60,11 +60,9 @@ public class PingProcess
             return task.Result;
         });
 
-        //await Task.WhenAll(all);
-        int total = all.Aggregate(0, (total, item) => total + item.Result.ExitCode);
+        await Task.WhenAll(all);
         stringBuilder.Append(all.Aggregate("", (soFar, item) => soFar.Trim() + item.Result.StdOutput));
-        Console.WriteLine(stringBuilder.ToString().Trim());
-        return new PingResult(total, stringBuilder.ToString().Trim());
+        return new PingResult(0, stringBuilder.ToString().Trim());
     }
 
      public Task<int> RunLongRunningAsync(ProcessStartInfo startInfo,
